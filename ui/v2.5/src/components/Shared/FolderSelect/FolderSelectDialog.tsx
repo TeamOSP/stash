@@ -18,7 +18,7 @@ export const FolderSelectDialog: React.FC<IProps> = ({
 
   return (
     <Modal show onHide={() => onClose()} title="">
-      <Modal.Header>Select Directory</Modal.Header>
+      <Modal.Header>Select directory</Modal.Header>
       <Modal.Body>
         <div className="dialog-content">
           <FolderSelect
