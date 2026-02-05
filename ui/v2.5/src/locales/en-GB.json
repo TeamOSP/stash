@@ -81,7 +81,7 @@
     "not_running": "not running",
     "open_in_external_player": "Open in external player",
     "open_random": "Open Random",
-    "optimise_database": "Optimise Database",
+    "optimise_database": "Optimise database",
     "overwrite": "Overwrite",
     "play": "Play",
     "play_random": "Play Random",
@@ -639,7 +639,7 @@
       },
       "custom_locales": {
         "description": "Override individual locale strings. See https://github.com/stashapp/stash/blob/develop/ui/v2.5/src/locales/en-GB.json for the master list. Page must be reloaded for changes to take effect.",
-        "heading": "Custom localisation",
+        "heading": "Custom Localisation",
         "option_label": "Custom localisation enabled"
       },
       "custom_title": {

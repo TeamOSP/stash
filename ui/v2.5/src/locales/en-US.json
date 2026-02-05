@@ -3,7 +3,7 @@
         "anonymise": "Anonymize",
         "download_anonymised": "Download anonymized",
         "customise": "Customize",
-        "optimise_database": "Optimize database"
+        "optimise_database": "Optimize Database"
     },
     "config": {
         "tools": {
@@ -13,7 +13,7 @@
         },
         "ui": {
             "custom_locales": {
-                "heading": "Custom Localization",
+                "heading": "Custom localization",
                 "option_label": "Custom localization enabled"
             }
         }
