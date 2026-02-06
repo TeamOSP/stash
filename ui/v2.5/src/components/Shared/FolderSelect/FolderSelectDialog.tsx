@@ -19,7 +19,7 @@ export const FolderSelectDialog: React.FC<IProps> = ({
   return (
     <Modal show onHide={() => onClose()} title="">
       <Modal.Header>
-        <FormattedMessage id="actions.add_directory" />
+        <FormattedMessage id="actions.select_directory" />
       </Modal.Header>
       <Modal.Body>
         <div className="dialog-content">
