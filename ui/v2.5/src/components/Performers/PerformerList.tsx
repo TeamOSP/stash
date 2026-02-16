@@ -1,7 +1,7 @@
 import cloneDeep from "lodash-es/cloneDeep";
 import React, { useCallback, useEffect } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Mousetrap from "mousetrap";
 import * as GQL from "src/core/generated-graphql";
 import {
@@ -41,7 +41,10 @@ import {
   FilteredSidebarHeader,
   useFilteredSidebarKeybinds,
 } from "../List/Filters/FilterSidebar";
-import { IListOperations, ListOperations } from "../List/ListOperationButtons";
+import {
+  IListFilterOperation,
+  ListOperations,
+} from "../List/ListOperationButtons";
 import { FilterTags } from "../List/FilterTags";
 import { Pagination, PaginationIndex } from "../List/Pagination";
 import { LoadedContent } from "../List/PagedList";
@@ -354,7 +357,6 @@ export const FilteredPerformerList = PatchComponent(
   (props: IPerformerList) => {
     const intl = useIntl();
     const history = useHistory();
-    const location = useLocation();
 
     const searchFocus = useFocus();
 
@@ -444,15 +446,6 @@ export const FilteredPerformerList = PatchComponent(
       result,
     });
 
-    function onCreateNew() {
-      let queryParam = new URLSearchParams(location.search).get("q");
-      let newPath = "/performers/new";
-      if (queryParam) {
-        newPath += "?q=" + encodeURIComponent(queryParam);
-      }
-      history.push(newPath);
-    }
-
     const viewRandom = useViewRandom(filter, totalCount);
 
     function onExport(all: boolean) {
@@ -505,8 +498,8 @@ export const FilteredPerformerList = PatchComponent(
       );
     }
 
-    const convertedExtraOperations: IListOperations[] = extraOperations.map(
-      (o) => ({
+    const convertedExtraOperations: IListFilterOperation[] =
+      extraOperations.map((o) => ({
         ...o,
         isDisplayed: o.isDisplayed
           ? () => o.isDisplayed!(result, filter, selectedIds)
@@ -514,10 +507,9 @@ export const FilteredPerformerList = PatchComponent(
         onClick: () => {
           o.onClick(result, filter, selectedIds);
         },
-      })
-    );
+      }));
 
-    const otherOperations: IListOperations[] = [
+    const otherOperations: IListFilterOperation[] = [
       ...convertedExtraOperations,
       {
         text: intl.formatMessage({ id: "actions.select_all" }),
@@ -564,8 +556,6 @@ export const FilteredPerformerList = PatchComponent(
         operations={otherOperations}
         onEdit={onEdit}
         onDelete={onDelete}
-        onCreateNew={onCreateNew}
-        entityType={intl.formatMessage({ id: "gallery" })}
         operationsMenuClassName="gallery-list-operations-dropdown"
       />
     );
