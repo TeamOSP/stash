@@ -9,6 +9,7 @@ import {
 import { useHistory } from "react-router-dom";
 import { TruncatedText } from "src/components/Shared/TruncatedText";
 import { DeleteFilesDialog } from "src/components/Shared/DeleteFilesDialog";
+import { RevealInFilesystemButton } from "src/components/Shared/RevealInFilesystemButton";
 import { ReassignFilesDialog } from "src/components/Shared/ReassignFilesDialog";
 import * as GQL from "src/core/generated-graphql";
 import { mutateSceneSetPrimaryFile } from "src/core/StashService";
@@ -70,12 +71,12 @@ const FileInfoPanel: React.FC<IFileInfoPanelProps> = (
           truncate
           internal
         />
-        <URLField
-          id="path"
-          url={`file://${props.file.path}`}
-          value={`file://${props.file.path}`}
-          truncate
-        />
+        <TextField id="path">
+          <span className="d-flex align-items-center">
+            <TruncatedText text={props.file.path} />
+            <RevealInFilesystemButton fileId={props.file.id} />
+          </span>
+        </TextField>
         <TextField id="filesize">
           <span className="text-truncate">
             <FileSize size={props.file.size} />

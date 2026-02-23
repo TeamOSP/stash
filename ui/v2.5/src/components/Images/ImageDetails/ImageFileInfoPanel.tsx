@@ -3,6 +3,7 @@ import { Accordion, Button, Card } from "react-bootstrap";
 import { FormattedMessage, FormattedTime } from "react-intl";
 import { TruncatedText } from "src/components/Shared/TruncatedText";
 import { DeleteFilesDialog } from "src/components/Shared/DeleteFilesDialog";
+import { RevealInFilesystemButton } from "src/components/Shared/RevealInFilesystemButton";
 import * as GQL from "src/core/generated-graphql";
 import { mutateImageSetPrimaryFile } from "src/core/StashService";
 import { useToast } from "src/hooks/Toast";
@@ -47,12 +48,12 @@ const FileInfoPanel: React.FC<IFileInfoPanelProps> = (
           truncate
           internal
         />
-        <URLField
-          id="path"
-          url={`file://${props.file.path}`}
-          value={`file://${props.file.path}`}
-          truncate
-        />
+        <TextField id="path">
+          <span className="d-flex align-items-center">
+            <TruncatedText text={props.file.path} />
+            <RevealInFilesystemButton fileId={props.file.id} />
+          </span>
+        </TextField>
         <TextField id="filesize">
           <span className="text-truncate">
             <FileSize size={props.file.size} />
